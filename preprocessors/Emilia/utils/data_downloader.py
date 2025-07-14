@@ -31,19 +31,38 @@ def download_dataset(output_data_path, emilia_token, data_path_pattern):
     print("")
     for file in tar_files:
         filename = str(Path(file).relative_to("datasets/amphion/Emilia-Dataset"))
-        print(datetime.datetime.now(), "downloaded file:",
-              api.hf_hub_download(repo_id="amphion/Emilia-Dataset", filename=filename, repo_type="dataset",
-                                  cache_dir=output_data_path, local_dir=output_data_path))
+        print(
+            datetime.datetime.now(),
+            "downloaded file:",
+            api.hf_hub_download(
+                repo_id="amphion/Emilia-Dataset",
+                filename=filename,
+                repo_type="dataset",
+                cache_dir=output_data_path,
+                local_dir=output_data_path,
+            ),
+        )
     print("")
     print("downloading dataset complete")
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Selectively download data from Emilia dataset.")
+    parser = argparse.ArgumentParser(
+        description="Selectively download data from Emilia dataset."
+    )
 
-    parser.add_argument("--output_data_path", required=True, type=str, help="Path of the output data")
-    parser.add_argument("--emilia_token", required=True, type=str, help="Emilia token for authentication")
-    parser.add_argument("--data_path_pattern", required=True, type=str, help="Data path pattern")
+    parser.add_argument(
+        "--output_data_path", required=True, type=str, help="Path of the output data"
+    )
+    parser.add_argument(
+        "--emilia_token",
+        required=True,
+        type=str,
+        help="Emilia token for authentication",
+    )
+    parser.add_argument(
+        "--data_path_pattern", required=True, type=str, help="Data path pattern"
+    )
     args = parser.parse_args()
 
     download_dataset(args.output_data_path, args.emilia_token, args.data_path_pattern)
